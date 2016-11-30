@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="easymusicforrun.easymusicforrun">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+
+        <meta-data
+            android:name="com.google.android.awareness.API_KEY"
+            android:value="@string/google_play_services_key" />
+
+        <!-- places/location declaration -->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_play_services_key" />
+
+        <!-- Beacon snapshots/fences declaration -->
+        <meta-data
+            android:name="com.google.android.nearby.messages.API_KEY"
+            android:value="@string/google_play_services_key" />
+
+        <activity android:name=".HomePage">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".ListActivity"
+            android:label="@string/app_name">
+        </activity>
+
+        <activity android:name=".MusicPlaying"
+            android:label="@string/app_name">
+            <receiver android:name=".MusicIntentReceiver" >
+                <intent-filter>
+                    <action android:name="android.intent.action.HEADSET_PLUG" />
+                </intent-filter>
+            </receiver>
+        </activity>
+
+        <activity android:name=".MusicPlaylist"
+        android:label="@string/app_name">
+    </activity>
+
+        <activity android:name=".UserPreferences"
+            android:label="@string/app_name">
+        </activity>
+
+        <receiver android:name=".ConnectivityChangeReceiver">
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+        </receiver>
+
+    </application>
+
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <permission android:name="android.permission.MEDIA_CONTENT_CONTROL" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="com.google.android.gms.permission.ACTIVITY_RECOGNITION" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
+</manifest>
