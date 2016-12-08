@@ -7,9 +7,9 @@ import java.io.FileOutputStream;
 
 public class UserProfileObj {
 
-    String localPlaylistClipName = "";
-    String youtubeVideoIdForRunning = "";
-    String youtubeVideoIdForWalking = "";
+    String localPlaylistClipName = "clip1";
+    String youtubeVideoIdForRunning = "75TwwtXF9vo";
+    String youtubeVideoIdForWalking = "75TwwtXF9vo";
 
     public String getLocalPlaylistClipName() {
         return localPlaylistClipName;

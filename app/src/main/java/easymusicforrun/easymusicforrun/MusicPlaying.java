@@ -47,7 +47,7 @@ public class MusicPlaying extends AppCompatActivity implements GoogleApiClient.O
     private MediaPlayer mp;
 
     protected IContextInterface contextService;
-    protected ServiceConnection addServiceConnection, contextServiceConnection;
+    protected ServiceConnection contextServiceConnection;
     private IContextCallback.Stub mContextCallback;
     private boolean mContextIsBound;
 
@@ -61,8 +61,6 @@ public class MusicPlaying extends AppCompatActivity implements GoogleApiClient.O
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_musicplaying);
 
-        initConnection();
-
         registerReceiver();
 
         mGoogleApiClient = new GoogleApiClient.Builder(this)
@@ -74,8 +72,9 @@ public class MusicPlaying extends AppCompatActivity implements GoogleApiClient.O
         detectActivity();
     }
 
-    void initConnection() {
-
+    @Override
+    public void onStart(){
+        super.onStart();
 
         contextServiceConnection = new ServiceConnection() {
             @Override
@@ -99,10 +98,12 @@ public class MusicPlaying extends AppCompatActivity implements GoogleApiClient.O
             }
         };
         if (contextService == null) {
-            Intent contextIntent = new Intent();
-            contextIntent.setPackage("easymusicforrun.easymusicforrun.ContextMiddlewareService");
-            contextIntent.setAction("easymusicforrun.easymusicforrun.ContextMiddlewareService.RUN");
-            bindService(contextIntent, contextServiceConnection, Context.BIND_AUTO_CREATE);
+            Intent contextIntent = new Intent("easymusicforrun.easymusicforrun.service.ContextMiddlewareService.RUN");
+            contextIntent.setPackage("easymusicforrun.easymusicforrun.service");
+//            contextIntent.setAction("easymusicforrun.easymusicforrun.service.ContextMiddlewareService.RUN");
+            ComponentName componentName = startService(contextIntent);
+            boolean flag = bindService(contextIntent, contextServiceConnection, Context.BIND_AUTO_CREATE);
+            System.out.println(componentName + "@SNS Muni" + flag);
             mContextIsBound = true;
             if(contextService==null)
                 Log.d("locService","NULL");
@@ -112,8 +113,8 @@ public class MusicPlaying extends AppCompatActivity implements GoogleApiClient.O
 
     protected void onDestroy() {
         super.onDestroy();
-        if(addServiceConnection != null)
-            unbindService(addServiceConnection);
+//        if(addServiceConnection != null)
+//            unbindService(addServiceConnection);
         if(contextServiceConnection != null)
             unbindService(contextServiceConnection);
     };
