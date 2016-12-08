@@ -100,8 +100,8 @@ public class MusicPlaying extends AppCompatActivity implements GoogleApiClient.O
         };
         if (contextService == null) {
             Intent contextIntent = new Intent();
-            contextIntent.setPackage("easymusicforrun.easymusicforrun.contextmiddlewareeasymusicforrun");
-            contextIntent.setAction("service.contextFinder");
+            contextIntent.setPackage("easymusicforrun.easymusicforrun.ContextMiddlewareService");
+            contextIntent.setAction("easymusicforrun.easymusicforrun.ContextMiddlewareService.RUN");
             bindService(contextIntent, contextServiceConnection, Context.BIND_AUTO_CREATE);
             mContextIsBound = true;
             if(contextService==null)
