@@ -61,6 +61,8 @@ public class MusicPlaying extends AppCompatActivity implements GoogleApiClient.O
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_musicplaying);
 
+        initConnection();
+
         registerReceiver();
 
         mGoogleApiClient = new GoogleApiClient.Builder(this)
@@ -72,10 +74,6 @@ public class MusicPlaying extends AppCompatActivity implements GoogleApiClient.O
         detectActivity();
     }
 
-    /*
- * Initialize connection with the service. Implement all Callback methods
- *
- */
     void initConnection() {
 
 
@@ -83,6 +81,7 @@ public class MusicPlaying extends AppCompatActivity implements GoogleApiClient.O
             @Override
             public void onServiceConnected(ComponentName name, IBinder service) {
                 contextService = IContextInterface.Stub.asInterface(service);
+                System.out.println("Service Connected");
                 Toast.makeText(getApplicationContext(),
                         "Context Service Connected", Toast.LENGTH_SHORT)
                         .show();
@@ -93,6 +92,7 @@ public class MusicPlaying extends AppCompatActivity implements GoogleApiClient.O
             public void onServiceDisconnected(ComponentName name) {
                 // TODO Auto-generated method stub
                 contextService = null;
+                System.out.println("Service DIsConnected");
                 Toast.makeText(getApplicationContext(), "Service Disconnected",
                         Toast.LENGTH_SHORT).show();
                 Log.d("IRemote", "Binding - Location Service disconnected");
